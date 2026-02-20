@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خريطة ذهنية – تاريخ الأردن</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#07090f;
+  --c1:#f59e0b;--c1d:rgba(245,158,11,0.12);
+  --c2:#06b6d4;--c2d:rgba(6,182,212,0.12);
+  --c3:#a855f7;--c3d:rgba(168,85,247,0.12);
+  --c4:#10b981;--c4d:rgba(16,185,129,0.12);
+  --c5:#ef4444;--c5d:rgba(239,68,68,0.12);
+  --c6:#f97316;--c6d:rgba(249,115,22,0.12);
+  --c7:#3b82f6;--c7d:rgba(59,130,246,0.12);
+  --c8:#ec4899;--c8d:rgba(236,72,153,0.12);
+  --text:#f1f5f9;--muted:#64748b;--border:#1e293b;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  direction:rtl;
+  overflow-x:hidden;
+}
+
+/* ─── PARTICLES BG ─── */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;border-radius:50%;animation:twinkle var(--d,3s) var(--del,0s) ease-in-out infinite alternate;}
+@keyframes twinkle{from{opacity:0.1;transform:scale(0.8);}to{opacity:0.8;transform:scale(1.2);}}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;z-index:2;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:2rem;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%,rgba(245,158,11,0.08) 0%,transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 80%,rgba(6,182,212,0.06) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 30%,rgba(168,85,247,0.05) 0%,transparent 60%);
+}
+.hero-khat{
+  font-size:clamp(0.7rem,1.5vw,0.9rem);
+  letter-spacing:0.3em;
+  color:var(--c1);
+  text-transform:uppercase;
+  margin-bottom:1rem;
+  opacity:0;animation:fadeup 0.8s 0.3s ease forwards;
+}
+.hero-title{
+  font-size:clamp(2.5rem,7vw,5.5rem);
+  font-weight:900;line-height:1.1;
+  background:linear-gradient(135deg,#f59e0b 0%,#fbbf24 30%,#06b6d4 70%,#a855f7 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:1rem;
+  opacity:0;animation:fadeup 0.8s 0.5s ease forwards;
+}
+.hero-sub{
+  font-size:clamp(1rem,2vw,1.3rem);color:var(--muted);
+  opacity:0;animation:fadeup 0.8s 0.7s ease forwards;
+  max-width:600px;line-height:1.8;
+}
+.hero-timeline{
+  display:flex;align-items:center;gap:0;
+  margin-top:3rem;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:fadeup 0.8s 1s ease forwards;
+}
+.ht-item{
+  display:flex;flex-direction:column;align-items:center;
+  cursor:pointer;transition:transform 0.3s;
+}
+.ht-item:hover{transform:translateY(-5px);}
+.ht-dot{
+  width:14px;height:14px;border-radius:50%;border:2px solid currentColor;
+  position:relative;transition:all 0.3s;
+}
+.ht-item:hover .ht-dot{box-shadow:0 0 12px currentColor;}
+.ht-label{font-size:0.65rem;margin-top:0.4rem;opacity:0.7;text-align:center;max-width:60px;}
+.ht-line{width:30px;height:2px;background:linear-gradient(90deg,currentColor,transparent);margin-bottom:20px;opacity:0.4;}
+.hero-scroll{
+  margin-top:2rem;
+  animation:bounce 2s ease infinite;
+  font-size:1.5rem;opacity:0.5;
+  opacity:0;animation:fadeup 0.8s 1.3s ease forwards,bounce 2s 2s ease infinite;
+}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+.scroll-btn{
+  display:inline-flex;align-items:center;gap:0.8rem;
+  background:linear-gradient(135deg,var(--c1),#f97316);
+  color:#000;border:none;padding:1rem 2.5rem;border-radius:50px;
+  font-size:1rem;font-weight:800;font-family:'Tajawal',sans-serif;
+  cursor:pointer;margin-top:2rem;
+  transition:transform 0.3s,box-shadow 0.3s;
+  box-shadow:0 4px 20px rgba(245,158,11,0.4);
+  opacity:0;animation:fadeup 0.8s 1.2s ease forwards;
+}
+.scroll-btn:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(245,158,11,0.6);}
+
+/* ─── NAV DOTS ─── */
+.nav-dots{
+  position:fixed;left:1.5rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:0.8rem;z-index:100;
+}
+.nav-dot{
+  width:10px;height:10px;border-radius:50%;background:var(--border);
+  border:1.5px solid transparent;cursor:pointer;transition:all 0.3s;
+}
+.nav-dot.active{background:currentColor;box-shadow:0 0 8px currentColor;}
+.nav-dot:hover{transform:scale(1.4);}
+
+/* ─── SECTIONS ─── */
+.section{
+  position:relative;z-index:2;
+  min-height:100vh;
+  padding:4rem 2rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.section-inner{max-width:1200px;width:100%;}
+
+.sec-badge{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.5rem 1.4rem;border-radius:50px;
+  font-size:0.8rem;font-weight:700;letter-spacing:0.08em;
+  margin-bottom:1.2rem;border:1.5px solid currentColor;
+}
+.sec-title{
+  font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.2;
+  margin-bottom:0.5rem;
+}
+.sec-desc{font-size:1rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.8;max-width:700px;}
+
+/* ─── CARDS GRID ─── */
+.cards-grid{
+  display:grid;gap:1.2rem;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+.card{
+  background:rgba(255,255,255,0.03);
+  border:1.5px solid var(--border);
+  border-radius:20px;padding:1.5rem;
+  transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+  cursor:pointer;position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  transition:opacity 0.3s;
+  background:radial-gradient(ellipse at top right, currentColor, transparent 70%);
+}
+.card:hover{transform:translateY(-6px);border-color:currentColor;}
+.card:hover::before{opacity:0.05;}
+.card-icon{font-size:2rem;margin-bottom:0.8rem;display:block;}
+.card-title{font-size:1.05rem;font-weight:800;margin-bottom:0.5rem;}
+.card-body{font-size:0.88rem;color:var(--muted);line-height:1.8;}
+.card-body b{font-weight:700;}
+.tag{
+  display:inline-block;
+  padding:0.2rem 0.7rem;border-radius:20px;
+  font-size:0.75rem;font-weight:700;
+  background:currentColor;
+  margin:0.15rem;
+}
+.tag span{color:var(--bg);}
+
+/* ─── FLOW CHAIN ─── */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;margin:1.5rem 0;}
+.flow-item{
+  padding:0.6rem 1.2rem;border-radius:10px;
+  font-size:0.9rem;font-weight:700;
+  border:1.5px solid currentColor;
+  background:rgba(0,0,0,0.3);
+  transition:all 0.3s;cursor:default;
+}
+.flow-item:hover{transform:scale(1.05);}
+.flow-arrow{font-size:1.2rem;opacity:0.5;}
+
+/* ─── FLAG SECTION ─── */
+.flag-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:2rem;
+  width:100%;
+}
+.flag-visual{
+  display:flex;flex-direction:column;align-items:center;
+  width:min(400px,90vw);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  position:relative;flex-shrink:0;
+}
+.flag-stripe{
+  width:100%;height:70px;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-right:1.5rem;
+  font-size:0.85rem;font-weight:700;
+  transition:all 0.3s;cursor:pointer;position:relative;
+}
+.flag-stripe:hover{filter:brightness(1.3);}
+.flag-tri{
+  position:absolute;left:0;top:0;
+  width:0;height:0;
+  border-style:solid;
+  border-width:105px 0 105px 90px;
+  border-color:transparent transparent transparent #c8102e;
+}
+.flag-star{
+  position:absolute;left:28px;top:50%;transform:translateY(-50%);
+  font-size:2.2rem;
+}
+.flag-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;width:100%;}
+.flag-card{
+  padding:1.2rem;border-radius:14px;text-align:center;
+  border:1.5px solid var(--border);
+  transition:all 0.3s;cursor:pointer;
+}
+.flag-card:hover{transform:translateY(-4px);border-color:currentColor;}
+.flag-swatch{width:40px;height:40px;border-radius:10px;margin:0 auto 0.6rem;}
+.flag-name{font-size:0.95rem;font-weight:800;margin-bottom:0.3rem;}
+.flag-meaning{font-size:0.8rem;color:var(--muted);}
+
+/* ─── TIMELINE VERTICAL ─── */
+.vtimeline{position:relative;padding-right:2rem;}
+.vtimeline::before{
+  content:'';position:absolute;right:0;top:0;bottom:0;
+  width:2px;
+  background:linear-gradient(to bottom,var(--c1),var(--c2),var(--c3),var(--c4),var(--c1));
+}
+.vt-item{
+  position:relative;margin-bottom:2rem;
+  padding-right:2.5rem;
+}
+.vt-dot{
+  position:absolute;right:-7px;top:0.4rem;
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid var(--bg);
+  box-shadow:0 0 12px currentColor;
+}
+.vt-year{font-size:0.8rem;font-weight:700;margin-bottom:0.3rem;opacity:0.8;}
+.vt-title{font-size:1.05rem;font-weight:800;margin-bottom:0.3rem;}
+.vt-body{font-size:0.88rem;color:var(--muted);line-height:1.7;}
+
+/* ─── QUIZ FLASHCARD ─── */
+.flashcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;}
+.flashcard{
+  height:160px;perspective:1000px;cursor:pointer;
+}
+.flashcard-inner{
+  width:100%;height:100%;
+  transition:transform 0.6s;
+  transform-style:preserve-3d;
+  position:relative;
+}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  border-radius:16px;padding:1.5rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;border:1.5px solid var(--border);
+}
+.flashcard-back{transform:rotateY(180deg);}
+.flashcard-front{background:rgba(255,255,255,0.03);}
+.fc-q{font-size:0.9rem;font-weight:700;line-height:1.6;}
+.fc-a{font-size:1rem;font-weight:800;line-height:1.6;}
+.fc-hint{font-size:0.7rem;color:var(--muted);margin-top:0.5rem;}
+
+/* ─── EMBLEM ─── */
+.emblem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+.emblem-card{
+  padding:1.5rem;border-radius:16px;text-align:center;
+  border:1.5px solid var(--border);
+  background:rgba(255,255,255,0.02);
+  transition:all 0.3s;
+}
+.emblem-card:hover{transform:scale(1.03);border-color:currentColor;}
+.emblem-icon{font-size:2.5rem;margin-bottom:0.6rem;display:block;}
+.emblem-name{font-size:1rem;font-weight:800;margin-bottom:0.3rem;}
+.emblem-meaning{font-size:0.83rem;color:var(--muted);line-height:1.6;}
+
+/* ─── GOLD RULES ─── */
+.gold-box{
+  background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(249,115,22,0.06));
+  border:1.5px solid rgba(245,158,11,0.4);
+  border-radius:16px;padding:1.5rem 2rem;
+  margin:1.5rem 0;
+  position:relative;overflow:hidden;
+}
+.gold-box::before{
+  content:'⭐';position:absolute;left:-10px;top:-10px;
+  font-size:5rem;opacity:0.05;
+}
+.gold-title{color:var(--c1);font-size:1.1rem;font-weight:800;margin-bottom:0.8rem;}
+.gold-item{
+  font-size:0.95rem;line-height:2;
+  border-bottom:1px solid rgba(245,158,11,0.15);padding:0.3rem 0;
+}
+.gold-item:last-child{border:none;}
+.gold-item b{color:var(--c1);}
+
+/* ─── TRAP BOX ─── */
+.trap-box{
+  background:rgba(239,68,68,0.06);
+  border:1.5px solid rgba(239,68,68,0.3);
+  border-radius:16px;padding:1.5rem 2rem;margin:1.5rem 0;
+}
+.trap-title{color:#f87171;font-size:1rem;font-weight:800;margin-bottom:0.8rem;}
+.trap-item{font-size:0.9rem;line-height:1.9;color:var(--muted);}
+.trap-item b{color:#fca5a5;}
+
+/* ─── PROGRESS TOP BAR ─── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;
+  height:3px;background:var(--border);z-index:200;
+}
+.topbar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));
+  width:0%;transition:width 0.3s;
+}
+
+/* ─── SECTION COLORS ─── */
+.s1{--sc:var(--c1);} .s2{--sc:var(--c2);} .s3{--sc:var(--c3);}
+.s4{--sc:var(--c4);} .s5{--sc:var(--c5);} .s6{--sc:var(--c6);}
+.s7{--sc:var(--c7);} .s8{--sc:var(--c8);}
+.sec-badge,.flow-item,.vt-dot,.card,.emblem-card,.flashcard-front,.flag-card{color:var(--sc);}
+
+/* ─── DIVIDER ─── */
+.wave-divider{
+  height:80px;position:relative;overflow:hidden;z-index:2;
+}
+.wave-divider svg{position:absolute;bottom:0;width:100%;}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeup{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadein{from{opacity:0;}to{opacity:1;}}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ─── BOTTOM CTA ─── */
+.final-section{
+  position:relative;z-index:2;
+  text-align:center;padding:5rem 2rem;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(245,158,11,0.06) 0%,transparent 70%);
+}
+.final-title{
+  font-size:clamp(2rem,5vw,3.5rem);font-weight:900;
+  background:linear-gradient(135deg,#f59e0b,#06b6d4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:1rem;
+}
+.final-stars{font-size:2rem;margin-bottom:1.5rem;letter-spacing:0.3rem;}
+
+/* ─── SCROLLSPY ─── */
+section[data-sec]{scroll-margin-top:60px;}
+
+/* Mobile */
+@media(max-width:600px){
+  .nav-dots{display:none;}
+  .flag-stripe{height:55px;}
+  .flag-tri{border-width:82.5px 0 82.5px 68px;}
+  .flag-star{font-size:1.6rem;left:18px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="topbar"><div class="topbar-fill" id="topbar"></div></div>
+
+<!-- Stars bg -->
+<div id="particles"></div>
+
+<!-- Nav dots -->
+<nav class="nav-dots" id="navdots"></nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section class="hero" id="sec0">
+  <div class="hero-khat">خريطة ذهنية تفاعلية · تاريخ الأردن</div>
+  <h1 class="hero-title">من الإمارة<br>إلى الاستقلال</h1>
+  <p class="hero-sub">رحلة الأردن من 1920 إلى 1955 — كل محطة، كل قرار، كل رمز</p>
+
+  <div class="hero-timeline">
+    <div class="ht-item" style="color:var(--c1)" onclick="scrollTo(1)">
+      <div class="ht-dot"></div>
+      <div class="ht-label">1920<br>وصول الأمير</div>
+    </div>
+    <div class="ht-line" style="color:var(--c1)"></div>
+    <div class="ht-item" style="color:var(--c2)" onclick="scrollTo(2)">
+      <div class="ht-dot"></div>
+      <div class="ht-label">1921<br>مؤتمر القاهرة</div>
+    </div>
+    <div class="ht-line" style="color:var(--c2)"></div>
+    <div class="ht-item" style="color:var(--c3)" onclick="scrollTo(3)">
+      <div class="ht-dot"></div>
+      <div class="ht-label">1928<br>الدستور</div>
+    </div>
+    <div class="ht-line" style="color:var(--c3)"></div>
+    <div class="ht-item" style="color:var(--c4)" onclick="scrollTo(4)">
+      <div class="ht-dot"></div>
+      <div class="ht-label">1929<br>انتخابات</div>
+    </div>
+    <div class="ht-line" style="color:var(--c4)"></div>
+    <div class="ht-item" style="color:var(--c6)" onclick="scrollTo(6)">
+      <div class="ht-dot"></div>
+      <div class="ht-label">1946<br>الاستقلال</div>
+    </div>
+    <div class="ht-line" style="color:var(--c6)"></div>
+    <div class="ht-item" style="color:var(--c7)" onclick="scrollTo(7)">
+      <div class="ht-dot"></div>
+      <div class="ht-label">1955<br>الأمم المتحدة</div>
+    </div>
+  </div>
+
+  <button class="scroll-btn" onclick="scrollToSec(1)">🚀 ابدأ الرحلة</button>
+</section>
+
+<!-- ════════════════ SECTION 1: التأسيس ════════════════ -->
+<section class="section s1" data-sec="1" id="sec1">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c1);border-color:var(--c1)">🌱 أولاً</div>
+    <h2 class="sec-title" style="color:var(--c1)">تأسيس إمارة شرق الأردن</h2>
+    <p class="sec-desc">الظروف التي أدت لقيام الإمارة وأهم الأحداث المفصلية</p>
+
+    <div class="cards-grid" style="--sc:var(--c1)">
+      <div class="card">
+        <span class="card-icon">🏛️</span>
+        <div class="card-title">الظروف التاريخية</div>
+        <div class="card-body">
+          سقوط الدولة العثمانية، تقسيم بلاد الشام، الاحتلال الفرنسي لسوريا، وحاجة العرب لقيادة سياسية.
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">👑</span>
+        <div class="card-title">الحدث المفصلي</div>
+        <div class="card-body">
+          <b style="color:var(--c1)">وصول الأمير عبد الله بن الحسين إلى معان عام 1920</b><br>
+          ثم مكوثه فيها بضعة أشهر قبل التفاوض مع البريطانيين.
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <div class="card-title">مؤتمر القاهرة 1921</div>
+        <div class="card-body">
+          برئاسة <b style="color:var(--c1)">تشرشل</b> — هدفه تنظيم الإدارة البريطانية في الشرق الأوسط وإنشاء حكومة محلية بالأردن.
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">✅</span>
+        <div class="card-title">نتائج التأسيس</div>
+        <div class="card-body">
+          قيام <b style="color:var(--c1)">إمارة شرق الأردن</b> ← استقلال إداري عن فلسطين ← بداية بناء الدولة
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-box reveal">
+      <div class="gold-title">⭐ قواعد ذهبية للحفظ</div>
+      <div class="gold-item">وصل الأمير لمعان سنة <b>1920</b> وبقي فيها <b>بضعة أشهر</b></div>
+      <div class="gold-item">مؤتمر القاهرة <b>1921</b> برئاسة <b>تشرشل</b></div>
+      <div class="gold-item">الاتفاق على الحكومة تم في <b>القدس</b> برئاسة الأمير عبد الله</div>
+      <div class="gold-item">الاستقلال الإداري كان عن <b>فلسطين</b> تحديدًا</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTION 2: المؤسسات ════════════════ -->
+<section class="section s2" data-sec="2" id="sec2">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c2);border-color:var(--c2)">🏛️ ثانياً</div>
+    <h2 class="sec-title" style="color:var(--c2)">بناء مؤسسات الدولة</h2>
+    <p class="sec-desc">من أول حكومة إلى الدستور والحياة البرلمانية</p>
+
+    <div class="vtimeline" style="--sc:var(--c2)">
+      <div class="vt-item">
+        <div class="vt-dot" style="background:var(--c2);color:var(--c2)"></div>
+        <div class="vt-year" style="color:var(--c2)">1921</div>
+        <div class="vt-title">مجلس المشاورين</div>
+        <div class="vt-body">أول حكومة أردنية — برئاسة <b>رشيد طليع</b>. طبيعة العلاقة: مشاركة في الصلاحيات التنفيذية مع الأمير.</div>
+      </div>
+      <div class="vt-item">
+        <div class="vt-dot" style="background:var(--c3);color:var(--c3)"></div>
+        <div class="vt-year" style="color:var(--c3)">1928</div>
+        <div class="vt-title">القانون الأساسي ← أول دستور أردني</div>
+        <div class="vt-body">صدر بعد الاتفاقية مع بريطانيا. يتألف من <b>72 مادة</b>. بداية الحياة الدستورية الرسمية.</div>
+      </div>
+      <div class="vt-item">
+        <div class="vt-dot" style="background:var(--c4);color:var(--c4)"></div>
+        <div class="vt-year" style="color:var(--c4)">1929</div>
+        <div class="vt-title">أول انتخابات نيابية</div>
+        <div class="vt-body">تأسيس المجلس التشريعي بـ <b>16 عضوًا</b> منتخبًا. بداية الحياة البرلمانية الأردنية.</div>
+      </div>
+    </div>
+
+    <div class="gold-box reveal">
+      <div class="gold-title">🔥 أكثر الفخاخ شيوعًا هنا</div>
+      <div class="gold-item"><b>القانون الأساسي ≠ استقلال!</b> هو دستور فقط، النفوذ البريطاني ما زال قائمًا</div>
+      <div class="gold-item">الترتيب: مجلس المشاورين <b>1921</b> ← دستور <b>1928</b> ← انتخابات <b>1929</b></div>
+      <div class="gold-item">القانون الأساسي = <b>72 مادة</b> وليس 60 أو 100</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTION 3: التحديات ════════════════ -->
+<section class="section s3" data-sec="3" id="sec3">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c3);border-color:var(--c3)">⚠️ ثالثاً</div>
+    <h2 class="sec-title" style="color:var(--c3)">التحديات التي واجهت الإمارة</h2>
+    <p class="sec-desc">تعرفي على الفرق بين التحديات الداخلية والخارجية</p>
+
+    <div class="cards-grid" style="--sc:var(--c3)">
+      <div class="card">
+        <span class="card-icon">🏠</span>
+        <div class="card-title">التحديات الداخلية</div>
+        <div class="card-body">
+          <div style="margin-bottom:0.5rem"><div class="tag"><span>رفض بعض شيوخ العشائر فقدان امتيازاتهم</span></div></div>
+          <div class="tag"><span>صعوبة بناء إدارة مركزية</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌍</span>
+        <div class="card-title">التحديات الخارجية</div>
+        <div class="card-body">
+          <div class="tag" style="margin-bottom:0.3rem"><span>ضغط فرنسي بسبب دعم المقاومة السورية</span></div>
+          <div class="tag"><span>غارات نجد</span></div>
+          <div class="tag"><span>هربرت صموئيل — ضم الأردن لفلسطين</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-box reveal">
+      <div class="trap-title">💀 فخ الفحص: داخلي أم خارجي؟</div>
+      <div class="trap-item">🔴 <b>الضغط الفرنسي</b> → خارجي</div>
+      <div class="trap-item">🔴 <b>ثورات نجد</b> → خارجي</div>
+      <div class="trap-item">🔴 <b>المشروع الصهيوني</b> → خارجي</div>
+      <div class="trap-item">🟢 <b>رفض الزعامات المحلية</b> → داخلي ✅</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTION 4: الاتفاقية ════════════════ -->
+<section class="section s4" data-sec="4" id="sec4">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c4);border-color:var(--c4)">📜 رابعاً</div>
+    <h2 class="sec-title" style="color:var(--c4)">الاتفاقية الأردنية البريطانية 1928</h2>
+    <p class="sec-desc">وُقعت في القدس — خطوة مهمة لكنها لم تحقق الاستقلال التام</p>
+
+    <div class="cards-grid" style="--sc:var(--c4)">
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <div class="card-title">الهدف</div>
+        <div class="card-body">تنظيم العلاقة مع بريطانيا والحصول على <b>استقلال إداري</b> أكبر</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <div class="card-title">أبرز البنود</div>
+        <div class="card-body">
+          وضع قانون أساسي (دستور) للبلاد<br>
+          تقديم بريطانيا <b>معونة مالية سنوية</b>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">⭐</span>
+        <div class="card-title">أهميتها</div>
+        <div class="card-body">اعتُبرت <b>"فاتحة عهد جديد"</b> — أقامت مؤسسات دستورية وحياة سياسية منظمة</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">❌</span>
+        <div class="card-title">حدودها</div>
+        <div class="card-body">
+          <b>لم تحقق الاستقلال التام</b><br>
+          النفوذ البريطاني بقي قائمًا حتى 1946
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-box reveal">
+      <div class="trap-title">🔥 الفخ الأشهر في هذه المرحلة</div>
+      <div class="trap-item"><b>دستور + انتخابات ≠ استقلال تام</b> — وجود مؤسسات لا يعني رحيل النفوذ البريطاني!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTION 5: الحركة الوطنية ════════════════ -->
+<section class="section s5" data-sec="5" id="sec5">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c5);border-color:var(--c5)">✊ خامساً</div>
+    <h2 class="sec-title" style="color:var(--c5)">الحركة الوطنية والمؤتمرات</h2>
+    <p class="sec-desc">المؤتمر الوطني 1928 والمطالب الشعبية بالاستقلال</p>
+
+    <div class="cards-grid" style="--sc:var(--c5)">
+      <div class="card">
+        <span class="card-icon">📅</span>
+        <div class="card-title">المؤتمر الوطني الأول</div>
+        <div class="card-body">
+          <b>25 تموز 1928</b> في <b>مقهى حمدان</b> بعمّان<br>
+          برئاسة <b>حسين باشا الطراونة</b><br>
+          ناقش الاتفاقية البريطانية
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">📃</span>
+        <div class="card-title">الميثاق الوطني 1928</div>
+        <div class="card-body">
+          • إمارة شرق الأردن دولة عربية مستقلة<br>
+          • رفض وعد بلفور<br>
+          • المطالبة بانتخابات نيابية حقيقية
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <div class="card-title">مطالب الحركة الوطنية</div>
+        <div class="card-body">
+          الاستقلال التام، إلغاء القوانين الاستثنائية، مكافحة الدعاية الصهيونية، معالجة الأزمة الاقتصادية
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <div class="card-title">وسائل المعارضة</div>
+        <div class="card-body">
+          مظاهرات + اجتماعات + إضرابات عامة + رفع احتجاجات + مقاطعة انتخابات = <b>جميع ما سبق</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-box reveal">
+      <div class="gold-title">📌 للحفظ السريع</div>
+      <div class="gold-item">المؤتمر الوطني = <b>مقهى حمدان</b> ليس قصر رغدان</div>
+      <div class="gold-item">توقفت المؤتمرات بسبب <b>الخلافات بين القيادات</b></div>
+      <div class="gold-item">الأحزاب اتسمت بـ <b>الطابع الشخصي</b> وليست قوية التنظيم</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTION 6: الاستقلال ════════════════ -->
+<section class="section s6" data-sec="6" id="sec6">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c6);border-color:var(--c6)">🏆 سادساً</div>
+    <h2 class="sec-title" style="color:var(--c6)">طريق الاستقلال</h2>
+    <p class="sec-desc">السلسلة الذهبية من التأسيس حتى الاستقلال الكامل</p>
+
+    <div class="flow" style="--sc:var(--c6)">
+      <div class="flow-item" style="color:var(--c1);border-color:var(--c1)">🌱 تأسيس الإمارة<br><small>1921</small></div>
+      <div class="flow-arrow">←</div>
+      <div class="flow-item" style="color:var(--c2);border-color:var(--c2)">📜 القانون الأساسي<br><small>1928</small></div>
+      <div class="flow-arrow">←</div>
+      <div class="flow-item" style="color:var(--c3);border-color:var(--c3)">✊ المؤتمرات الوطنية<br><small>1928+</small></div>
+      <div class="flow-arrow">←</div>
+      <div class="flow-item" style="color:var(--c4);border-color:var(--c4)">🤝 معاهدة 1946</div>
+      <div class="flow-arrow">←</div>
+      <div class="flow-item" style="color:var(--c6);border-color:var(--c6);background:rgba(249,115,22,0.1)">🏆 الاستقلال<br><small>25 أيار 1946</small></div>
+    </div>
+
+    <div class="cards-grid" style="--sc:var(--c6);margin-top:1.5rem">
+      <div class="card">
+        <span class="card-icon">📅</span>
+        <div class="card-title">يوم الاستقلال</div>
+        <div class="card-body">
+          <b style="color:var(--c6)">25 أيار 1946</b><br>
+          بايع المجلس التشريعي الأمير عبد الله ملكًا<br>
+          بلقب: <b>"ملك المملكة الأردنية الهاشمية"</b>
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">👑</span>
+        <div class="card-title">نظام الحكم</div>
+        <div class="card-body">
+          <b style="color:var(--c6)">ملكي وراثي نيابي</b><br>
+          ← ليس جمهوري ← ليس عسكري ← ليس اتحادي
+        </div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌍</span>
+        <div class="card-title">ما بعد الاستقلال</div>
+        <div class="card-body">
+          تعديل المعاهدة 1948 بسبب حرب فلسطين<br>
+          مدتها: <b>25 سنة</b><br>
+          الانضمام للأمم المتحدة <b>1955</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-box reveal">
+      <div class="trap-title">💀 فخاخ الاستقلال الأشهر</div>
+      <div class="trap-item">🔴 الاستقلال <b>1946</b> ≠ الانضمام للأمم المتحدة (1955)</div>
+      <div class="trap-item">🔴 الاستقلال جاء بسبب <b>معاهدة 1946</b> وليس القانون الأساسي</div>
+      <div class="trap-item">🔴 نظام الحكم <b>ملكي وراثي نيابي</b> — أشهر فخ في الامتحانات!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTION 7: العلم ════════════════ -->
+<section class="section s7" data-sec="7" id="sec7">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c7);border-color:var(--c7)">🇯🇴 سابعاً</div>
+    <h2 class="sec-title" style="color:var(--c7)">الرموز الوطنية — العلم الأردني</h2>
+    <p class="sec-desc">الاستخدام الرسمي للعلم بدأ 1928 — احفظي كل لون ورمزه</p>
+
+    <div class="flag-wrap">
+      <!-- Flag visual -->
+      <div class="flag-visual">
+        <div class="flag-stripe" style="background:#000;color:#fff">
+          <span>الأسود — الدولة العباسية</span>
+        </div>
+        <div class="flag-stripe" style="background:#fff;color:#000">
+          <span>الأبيض — الدولة الأموية</span>
+        </div>
+        <div class="flag-stripe" style="background:#007a3d;color:#fff">
+          <span>الأخضر — الدولة الفاطمية</span>
+        </div>
+        <div class="flag-tri"></div>
+        <div class="flag-star">⭐</div>
+      </div>
+
+      <!-- Color cards -->
+      <div class="flag-cards" style="--sc:var(--c7)">
+        <div class="flag-card" style="color:var(--c7)">
+          <div class="flag-swatch" style="background:#000;border:1px solid #333"></div>
+          <div class="flag-name" style="color:#fff">الأسود 🖤</div>
+          <div class="flag-meaning">الدولة <b style="color:#cbd5e1">العباسية</b></div>
+        </div>
+        <div class="flag-card" style="color:var(--c7)">
+          <div class="flag-swatch" style="background:#fff"></div>
+          <div class="flag-name" style="color:#fff">الأبيض 🤍</div>
+          <div class="flag-meaning">الدولة <b style="color:#cbd5e1">الأموية</b></div>
+        </div>
+        <div class="flag-card" style="color:var(--c7)">
+          <div class="flag-swatch" style="background:#007a3d"></div>
+          <div class="flag-name" style="color:#fff">الأخضر 💚</div>
+          <div class="flag-meaning">الدولة <b style="color:#cbd5e1">الفاطمية</b></div>
+        </div>
+        <div class="flag-card" style="color:var(--c7)">
+          <div class="flag-swatch" style="background:#c8102e"></div>
+          <div class="flag-name" style="color:#fff">الأحمر ❤️</div>
+          <div class="flag-meaning"><b style="color:#cbd5e1">الثورة العربية الكبرى</b></div>
+        </div>
+        <div class="flag-card" style="color:var(--c7)">
+          <div class="flag-swatch" style="background:linear-gradient(135deg,#fff,#f59e0b);border:1px solid #444"></div>
+          <div class="flag-name" style="color:#fff">النجمة السباعية ⭐</div>
+          <div class="flag-meaning"><b style="color:var(--c1)">سورة الفاتحة</b> ← أكثر سؤال فخ!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-box reveal" style="margin-top:2rem">
+      <div class="trap-title">💀 فخ النجمة السباعية — الأشهر على الإطلاق!</div>
+      <div class="trap-item">🔴 ليست الدول العربية السبع ❌</div>
+      <div class="trap-item">🔴 ليست القبائل الأردنية ❌</div>
+      <div class="trap-item">🔴 ليست مبادئ الثورة ❌</div>
+      <div class="trap-item">🟢 <b>سورة الفاتحة (الآيات السبع)</b> ✅</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTION 8: الشعار والسلام ════════════════ -->
+<section class="section s8" data-sec="8" id="sec8">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c8);border-color:var(--c8)">👑 ثامناً</div>
+    <h2 class="sec-title" style="color:var(--c8)">شعار المملكة والسلام الملكي</h2>
+    <p class="sec-desc">كل رمز في الشعار له معنى — والسلام الملكي أُقر 1938</p>
+
+    <div class="emblem-grid" style="--sc:var(--c8)">
+      <div class="emblem-card" style="color:var(--c8)">
+        <span class="emblem-icon">👑</span>
+        <div class="emblem-name">التاج الملكي</div>
+        <div class="emblem-meaning">يمثل النظام الملكي الوراثي</div>
+      </div>
+      <div class="emblem-card" style="color:var(--c8)">
+        <span class="emblem-icon">🦅</span>
+        <div class="emblem-name">طير العقاب</div>
+        <div class="emblem-meaning">القوة والهيبة والعلو</div>
+      </div>
+      <div class="emblem-card" style="color:var(--c8)">
+        <span class="emblem-icon">🌍</span>
+        <div class="emblem-name">الكرة الأرضية</div>
+        <div class="emblem-meaning">انتشار الإسلام وحضارته</div>
+      </div>
+      <div class="emblem-card" style="color:var(--c8)">
+        <span class="emblem-icon">⚔️</span>
+        <div class="emblem-name">السيوف</div>
+        <div class="emblem-meaning">الدفاع عن الوطن</div>
+      </div>
+    </div>
+
+    <div class="gold-box reveal" style="margin-top:2rem">
+      <div class="gold-title">🎵 السلام الملكي الأردني</div>
+      <div class="gold-item">أُقر عام <b>1938</b></div>
+      <div class="gold-item">كاتب الكلمات: <b>عبد المنعم الرفاعي</b></div>
+      <div class="gold-item">يمثل السيادة والهوية الوطنية</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SECTION 9: بطاقات الحفظ ════════════════ -->
+<section class="section" data-sec="9" id="sec9" style="--sc:var(--c1)">
+  <div class="section-inner reveal">
+    <div class="sec-badge" style="color:var(--c1);border-color:var(--c1)">🧠 تاسعاً</div>
+    <h2 class="sec-title" style="color:var(--c1)">بطاقات الحفظ التفاعلية</h2>
+    <p class="sec-desc">انقري على كل بطاقة لترى الجواب 🃏</p>
+
+    <div class="flashcards">
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c1)">
+            <div class="fc-q">مؤتمر القاهرة 1921 برئاسة من؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(245,158,11,0.08);border-color:var(--c1)">
+            <div class="fc-a" style="color:var(--c1)">تشرشل 🎩</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c2)">
+            <div class="fc-q">أول رئيس لمجلس المشاورين؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(6,182,212,0.08);border-color:var(--c2)">
+            <div class="fc-a" style="color:var(--c2)">رشيد طليع</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c3)">
+            <div class="fc-q">القانون الأساسي يتكون من كم مادة؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(168,85,247,0.08);border-color:var(--c3)">
+            <div class="fc-a" style="color:var(--c3)">72 مادة 📃</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c4)">
+            <div class="fc-q">عدد أعضاء المجلس التشريعي الأول؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(16,185,129,0.08);border-color:var(--c4)">
+            <div class="fc-a" style="color:var(--c4)">16 عضوًا</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c5)">
+            <div class="fc-q">أين عُقد المؤتمر الوطني الأول؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(239,68,68,0.08);border-color:var(--c5)">
+            <div class="fc-a" style="color:var(--c5)">مقهى حمدان ☕</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c6)">
+            <div class="fc-q">تاريخ إعلان الاستقلال؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(249,115,22,0.08);border-color:var(--c6)">
+            <div class="fc-a" style="color:var(--c6)">25 أيار 1946 🏆</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c7)">
+            <div class="fc-q">النجمة السباعية ترمز إلى؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(59,130,246,0.08);border-color:var(--c7)">
+            <div class="fc-a" style="color:var(--c7)">سورة الفاتحة ⭐</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c8)">
+            <div class="fc-q">السلام الملكي — من كتب الكلمات؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(236,72,153,0.08);border-color:var(--c8)">
+            <div class="fc-a" style="color:var(--c8)">عبد المنعم الرفاعي 🎵</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c1)">
+            <div class="fc-q">متى انضم الأردن للأمم المتحدة؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(245,158,11,0.08);border-color:var(--c1)">
+            <div class="fc-a" style="color:var(--c1)">1955 🌍</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c2)">
+            <div class="fc-q">نظام الحكم بعد الاستقلال؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(6,182,212,0.08);border-color:var(--c2)">
+            <div class="fc-a" style="color:var(--c2)">ملكي وراثي نيابي 👑</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c3)">
+            <div class="fc-q">اللون الأبيض في العلم يرمز لـ؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(168,85,247,0.08);border-color:var(--c3)">
+            <div class="fc-a" style="color:var(--c3)">الدولة الأموية 🤍</div>
+          </div>
+        </div>
+      </div>
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front" style="border-color:var(--c4)">
+            <div class="fc-q">الكرة الأرضية في الشعار ترمز؟</div>
+            <div class="fc-hint">انقر للجواب</div>
+          </div>
+          <div class="flashcard-back" style="background:rgba(16,185,129,0.08);border-color:var(--c4)">
+            <div class="fc-a" style="color:var(--c4)">انتشار الإسلام وحضارته 🌍</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ FINAL ════════════════ -->
+<div class="final-section">
+  <div class="final-stars">🇯🇴 ⭐ 🏆</div>
+  <div class="final-title">أنتِ جاهزة!<br>وفقك الله يا رغد</div>
+  <p style="color:var(--muted);margin-top:1rem;font-size:1rem">راجعي البطاقات التفاعلية قبل الامتحان مباشرة 💪</p>
+</div>
+
+<script>
+// ─── Stars ───
+const p = document.getElementById('particles');
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const sz=Math.random()*2.5+0.5;
+  s.style.cssText=`
+    width:${sz}px;height:${sz}px;
+    left:${Math.random()*100}%;top:${Math.random()*100}%;
+    background:hsl(${Math.random()*60+30},80%,80%);
+    --d:${Math.random()*4+2}s;--del:${Math.random()*5}s;
+  `;
+  p.appendChild(s);
+}
+
+// ─── Nav dots ───
+const sections = ['hero','sec1','sec2','sec3','sec4','sec5','sec6','sec7','sec8','sec9'];
+const labels = ['🏠','🌱','🏛️','⚠️','📜','✊','🏆','🇯🇴','👑','🧠'];
+const colors = ['#f59e0b','#f59e0b','#06b6d4','#a855f7','#10b981','#ef4444','#f97316','#3b82f6','#ec4899','#f59e0b'];
+const nav = document.getElementById('navdots');
+
+sections.forEach((id,i)=>{
+  const d=document.createElement('div');
+  d.className='nav-dot';
+  d.style.color=colors[i];
+  d.title=labels[i];
+  d.onclick=()=>document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  nav.appendChild(d);
+});
+
+// ─── Scroll logic ───
+function scrollToSec(i){
+  document.getElementById('sec'+i).scrollIntoView({behavior:'smooth'});
+}
+window.scrollTo=(i)=>scrollToSec(i);
+
+// ─── Progress + reveal + active dot ───
+const allReveal = document.querySelectorAll('.reveal');
+const navDotEls = nav.querySelectorAll('.nav-dot');
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+},{threshold:0.1});
+allReveal.forEach(el=>observer.observe(el));
+
+window.addEventListener('scroll',()=>{
+  // Topbar progress
+  const total = document.body.scrollHeight - window.innerHeight;
+  document.getElementById('topbar').style.width=(window.scrollY/total*100)+'%';
+
+  // Active nav dot
+  sections.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const rect=el.getBoundingClientRect();
+    if(rect.top<=window.innerHeight/2 && rect.bottom>=window.innerHeight/2){
+      navDotEls.forEach(d=>d.classList.remove('active'));
+      navDotEls[i]&&navDotEls[i].classList.add('active');
+      navDotEls[i]&&(navDotEls[i].style.background=colors[i]);
+    }
+  });
+},{passive:true});
+</script>
+</body>
+</html>
